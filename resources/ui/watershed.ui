@@ -54,7 +54,7 @@
                </widget>
               </item>
               <item>
-               <spacer name="horizontalSpacer_3">
+               <spacer name="horizontalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -67,10 +67,29 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="bttBlurOryginalImage">
+               <widget class="QPushButton" name="bttInvertOryginalImage">
                 <property name="minimumSize">
                  <size>
-                  <width>82</width>
+                  <width>88</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Invert</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="bttBlurOryginalImage">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>80</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>88</width>
                   <height>0</height>
                  </size>
                 </property>
@@ -647,6 +666,38 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>299</x>
      <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bttInvertOryginalImage</sender>
+   <signal>pressed()</signal>
+   <receiver>optShowOryginalImage</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>52</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bttComputeBinaryImage</sender>
+   <signal>pressed()</signal>
+   <receiver>optShowInitialImage</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>344</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>

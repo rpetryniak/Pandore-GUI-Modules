@@ -28,6 +28,7 @@ Watershed::Watershed(QWidget *parent)
   connect(ui->optSetBinaryImage,           SIGNAL(clicked()),     this, SLOT(showInitialImage()));
 
   connect(ui->bttBlurOryginalImage,        SIGNAL(clicked()),     this, SLOT(blurOryginalImage()));
+  connect(ui->bttInvertOryginalImage,      SIGNAL(clicked()),     this, SLOT(invertOryginalImage()));
   connect(ui->bttComputeGradient,          SIGNAL(clicked()),     this, SLOT(computeGradient()));
   connect(ui->bttComputeDistanceMap,       SIGNAL(clicked()),     this, SLOT(computeDistanceMap()));
   connect(ui->bttComputeLocalMinimumPoints,SIGNAL(clicked()),     this, SLOT(computeLocalMinimumPoints()));
@@ -161,7 +162,7 @@ void Watershed::showInitialImage()
 {
   if(ui->optShowInitialImage->isChecked()) {
     if (ui->optSetLocalMinimum->isChecked())
-      ui->imageLabel->setImage(isLocalMinimaImage_computed ? localMinimaImage:bluredImage);
+      ui->imageLabel->setImage(isLocalMinimaImage_computed ? colorLocalMinimaImage :bluredImage);
     else
     if (ui->optSetMarker->isChecked())
       ui->imageLabel->setImage(ui->imageLabel->getImage());
@@ -169,6 +170,15 @@ void Watershed::showInitialImage()
     if (ui->optSetBinaryImage->isChecked())
       ui->imageLabel->setImage(isBinaryImage_computed ? binaryImage:bluredImage);
   }
+}
+
+
+void Watershed::invertOryginalImage()
+{
+  oryginalImage.invertPixels();
+  bluredImage.invertPixels();
+
+  showOryginalImage();
 }
 
 void Watershed::blurOryginalImage()
@@ -216,6 +226,12 @@ void Watershed::computeDistanceMap()
 void Watershed::computeLocalMinimumPoints()
 {
   localMinimaImage = localMinimumPointsAlgorithm( bluredImage );
+
+  CImg<unsigned char> clabel = colorizeLabelImage( qt2cimg(localMinimaImage).dilate(2) );
+  CImg<unsigned char> cimage = qt2cimg(bluredImage);
+  cimage += clabel;
+  colorLocalMinimaImage = cimg2qt(cimage);
+
   isLocalMinimaImage_computed = true;
   showInitialImage();
 }

@@ -32,6 +32,7 @@ private slots:
 	void showOryginalImage();
 	void showImageForComputations();
 	void showInitialImage();
+  void invertOryginalImage();
   void blurOryginalImage();
   void computeGradient();
   void computeDistanceMap();
@@ -46,7 +47,7 @@ private:
 private:
 	Ui::WatershedClass *ui;
 	
-  QImage oryginalImage, bluredImage, gradientImage, distanceMapImage, localMinimaImage, markerImage, binaryImage;
+  QImage oryginalImage, bluredImage, gradientImage, distanceMapImage, localMinimaImage, colorLocalMinimaImage, markerImage, binaryImage;
   QImage grayRegionImageTmp, colorRegionImageTmp;
   PRegionImage pRegionImage;
 	

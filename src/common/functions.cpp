@@ -240,6 +240,7 @@ CImg<unsigned char> colorizeLabelImage(CImg<T> image, bool randomColor)
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       int comp = image(x,y,0,0);
+      if (comp == 0) continue;
       //if (sizeof(colors) < comp) printf("CAUSION!!! maxvalue=%d, comp=%d, sizeof(colors)=%d  \n",maxvalue,comp,sizeof(colors));
       output(x,y,0,0) = colors[comp].r;
       output(x,y,0,1) = colors[comp].g;
